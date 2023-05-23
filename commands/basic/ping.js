@@ -3,8 +3,11 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('ping')
-        .setDescription('Replies with Pong Boy!'),
+        .setDescription('Replies with Current Ping value of User!'),
     async execute(interaction) {
-        await interaction.reply('Pong! How are you ?');
-    },
+        if (interaction.commandName === 'ping') {
+            const userPing = Math.round(interaction.user.client.ws.ping);
+            await interaction.reply(`Your ping is ${userPing}ms.`);
+        }
+    }
 };
