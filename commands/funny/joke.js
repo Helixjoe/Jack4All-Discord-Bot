@@ -1,33 +1,57 @@
-const { SlashCommandBuilder } = require('discord.js');
+const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 const baseURL = "https://v2.jokeapi.dev";
-const categories = ["Programming", "Misc", "Pun", "Spooky", "Christmas"];
 const params = [
     "blacklistFlags=nsfw,religious,racist",
     "idRange=0-100"
 ];
 const https = require('https');
+
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('joke')
         .setDescription('Provides a joke.')
+        .addStringOption(option =>
+            option.setName('category')
+                .setDescription('The joke category')
+                .setRequired(true)
+                .addChoices(
+                    { name: 'Any 🤪', value: 'Any' },
+                    { name: 'Programming 🤖', value: 'Programming' },
+                    { name: 'Misc 😂', value: 'Misc' },
+                    { name: 'Pun 😆', value: 'Pun' },
+                    { name: 'Dark 💀', value: 'Dark' },
+                )),
     // .addStringOption(option =>
     //     option.setName('input')
     //         .setDescription('The input to echo back'))
-    ,
+
     async execute(interaction) {
-        https.get(`${baseURL}/joke/${categories.join(",")}?${params.join("&")}`, res => {
+        const category = interaction.options.getString("category");
+        https.get(`${baseURL}/joke/${category}?${params.join("&")}`, res => {
             console.log("\n");
             res.on("data", async chunk => {
                 let randomJoke = JSON.parse(chunk.toString());
-                console.log(randomJoke);
                 if (randomJoke.type == "single") {
-                    await interaction.reply(randomJoke.joke);
+                    const embed = new EmbedBuilder()
+                        .setTitle(randomJoke.joke).setColor("#000066");
+                    await interaction.reply({ embeds: [embed] });
                 }
                 else {
-                    await interaction.reply(randomJoke.setup);
+                    const embedSetup = new EmbedBuilder()
+                        .setTitle(randomJoke.setup)
+                        .setColor("#000066");
+                    await interaction.reply({ embeds: [embedSetup] });
+                    const embedDrum = new EmbedBuilder()
+                        .setTitle("🥁")
+                        .setColor("#cc0000");
                     setTimeout(async () => {
-                        await interaction.channel.send(randomJoke.delivery);
-                    }, 3000);
+                        await interaction.channel.send({ embeds: [embedDrum] });
+                    }, 1000);
+                    const embedDelivery = new EmbedBuilder()
+                        .setTitle(randomJoke.delivery).setColor("#009933");
+                    setTimeout(async () => {
+                        await interaction.channel.send({ embeds: [embedDelivery] });
+                    }, 3500);
                 }
             });
 
