@@ -1,4 +1,4 @@
-# Jack4Everyone-Discord-Bot
+# Jack4All Discord Bot
 
 This is a discord bot created using discord.js. The commands available are:
 <li>/user</li>
