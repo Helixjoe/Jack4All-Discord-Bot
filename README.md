@@ -1,5 +1,5 @@
 # Jack4All Discord Bot
-
+![Jack](/images/hyena.png)  
 This is a discord bot created using discord.js. The commands available are:
 <h2>Basic commands</h2>
 <ul>
