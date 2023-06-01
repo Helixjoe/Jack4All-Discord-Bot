@@ -1,6 +1,7 @@
 # Jack4All Discord Bot V1.0
-<img src = "images/hyena.png" height=100px width = 100px> 
-This is a discord bot created using discord.js. The commands available are:
+<img src = "images/hyena.png" height=150px width = 180px> 
+<br>
+<p>This is a discord bot created using discord.js. The commands available are:</p>
 <h2>Basic commands</h2>
 <ul>
   <li>/user</li>
