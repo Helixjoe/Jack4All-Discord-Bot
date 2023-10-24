@@ -24,5 +24,9 @@ Tells the info about the server the user is using
 Tells the user about how many users are there excluding the bot and the user.
 
 <h2>/joke</h2>
-Tells a joke in the server using Joke API
-
+<p>Tells a joke in the server using <a href="https://sv443.net/jokeapi/v2/">JokeAPI</a><p>
+<br>
+<img src = "images/Demo 1.png" height=350px > 
+<img src = "images/Demo 2.png" height=250px > 
+<img src = "images/Demo 3.png" height=250px> 
+<br>
